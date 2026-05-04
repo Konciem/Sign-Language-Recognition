@@ -1,22 +1,19 @@
 import cv2
 
-print("wlaczamy okienko")
-
-#init kamery
+print("Uruchomienie programu")
 
 camera = cv2.VideoCapture(0)
-x =0
 while True:
 
-    sukces, obraz = camera.read()
+    success, frame = camera.read()
 
-    if not sukces:
+    if not success:
         print("nie udalo sie!!!")
         break
 
-    obraz_flipped = cv2.flip(obraz, 1)
+    frame_flipped = cv2.flip(frame, 1)
 
-    cv2.imshow("okienko", obraz_flipped)
+    cv2.imshow("okienko", frame_flipped)
 
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
@@ -24,4 +21,4 @@ while True:
 
 camera.release()
 cv2.destroyAllWindows()
-print("Program zakończony.")
+print("Program end")
