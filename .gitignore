@@ -1,0 +1,9 @@
+# virtual envs
+.venv/
+venv/
+env/
+
+# Smieci
+__pycache__/
+*.pyc
+.DS_Store
