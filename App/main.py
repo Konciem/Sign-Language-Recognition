@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 
-print("Uruchomienie programu")
+print("Start")
 camera = cv2.VideoCapture(0)
 
 while True:
@@ -23,4 +23,4 @@ while True:
 
 camera.release()
 cv2.destroyAllWindows()
-print("Program end")
+print("End")
