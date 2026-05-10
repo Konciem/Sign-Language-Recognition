@@ -7,7 +7,9 @@ Desktop Application to recognise ASL sign language using AI.
 ## Model Training
 - ### Dataset
 
-- ### Algorithm
+- ### Data extraction
+
+- ### Training
 
 ## Acknowledgements / Dataset
 
