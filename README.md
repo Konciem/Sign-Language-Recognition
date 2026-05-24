@@ -7,7 +7,7 @@ This is a desktop application that uses AI to recognize American Sign Language (
 The entire "learning" process of AI is located in the Jupyter Notebook file (`training.ipynb`). It is divided into two main stages:
 
 * **Data Extraction:** Instead of training the algorithm on raw images, the program uses the MediaPipe library to "see" key hand landmarks (e.g., joint positions and fingertips) across thousands of training photos. These exact coordinates are extracted and saved into the `extracted_data.csv` spreadsheet.
-* **Model Training:** In this section, we feed the collected points into a Random Forest Classifier algorithm. The program evaluates its knowledge by generating a confusion matrix – in our tests, it achieved an excellent accuracy of over 98.2%. The ready, "smart" model is saved to the `asl_model.pkl` file so the main application can use it instantly.
+* **Model Training:** In this section, I feed the collected points into a Random Forest Classifier algorithm. The program evaluates its knowledge by generating a confusion matrix – in tests, it achieved an excellent accuracy of over 98.2%. The ready model is saved to the `asl_model.pkl` file so the main application can use it instantly.
 
 <img width="1179" height="1189" alt="Image" src="https://github.com/user-attachments/assets/2e60c138-efe7-4014-a59e-b7e00572363e" />
 
