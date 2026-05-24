@@ -3,3 +3,4 @@ mediapipe-silicon
 numpy
 pandas
 scikit-learn
+streamlit
