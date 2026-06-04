@@ -1,5 +1,7 @@
 # Sign Language Recognition
 
+![Made with Python](https://img.shields.io/badge/Python-FFD43B?style=flat&logo=python&logoColor=blue)
+
 ## Project Description
 This is a desktop application that uses AI to recognize American Sign Language (ASL) signs. The program analyzes the camera, locates the user's hand, and based on the finger positions in real-time, guesses which letter of the alphabet is currently being shown.
 
