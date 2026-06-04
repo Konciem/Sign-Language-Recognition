@@ -2,7 +2,7 @@
 .venv/
 venv/
 env/
-.idea
+.idea/
 
 # Smieci
 __pycache__/
