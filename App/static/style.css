@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('JetBrainsMono-Medium.ttf');
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #121212;
+    color: #00ff00;
+    display: flex;
+    justify-content: center;
+}
+
+#result {
+    font-size: 2rem;
+    color: #00ff00;
+    margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
