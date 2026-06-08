@@ -1,7 +1,9 @@
 from flask import Flask, render_template, Response
-import cv2
+from stabilizer import GestureStabilizer
 import mediapipe as mp
+import cv2
 import pickle
+
 
 app = Flask(__name__)
 
@@ -14,6 +16,7 @@ mp_draw = mp.solutions.drawing_utils
 
 camera = cv2.VideoCapture(0)
 
+stabilizer = GestureStabilizer(window_size=15)
 
 def generate_frames():
     while True:
@@ -36,8 +39,9 @@ def generate_frames():
 
                 prediction = model.predict([data_aux])
                 predicted_char = prediction[0]
+        stable_char = stabilizer.get_stable_prediction(predicted_char)
 
-        cv2.putText(frame, predicted_char, (50, 50),
+        cv2.putText(frame, stable_char, (50, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3)
 
         _, buffer = cv2.imencode('.jpg', frame)
