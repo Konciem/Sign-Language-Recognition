@@ -7,8 +7,43 @@
     <div class="container">
         <h1>American Sign Language Recognition </h1>
         <img src="{{ url_for('video_feed') }}" width="900">
-        <div id="result">Result: ---</div>
-        <div id="result">Word(State Machine): ---</div>
+
+        <div id="result-char">Result: ---</div>
+        <div id="result-word">Word(State Machine): ---</div>
+
+        <button id="reset-btn" onclick="resetWord()" style="margin-top: 20px; padding: 12px 24px; font-size: 16px; font-weight: bold; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background 0.2s;">
+            Resetuj ciąg znaków
+        </button>
     </div>
+
+    <script>
+        // Automatyczne pobieranie aktualnego znaku i słowa
+        function updateData() {
+            fetch('/get_data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result-char').innerText = 'Result: ' + data.char;
+                    document.getElementById('result-word').innerText = 'Word(State Machine): ' + data.word;
+                })
+                .catch(error => console.error('Błąd podczas pobierania danych:', error));
+        }
+
+        // FUNKCJA RESETUJĄCA: Wysyła żądanie POST do serwera
+        function resetWord() {
+            fetch('/reset', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('result-word').innerText = 'Word(State Machine): ---';
+                }
+            })
+            .catch(error => console.error('Błąd podczas resetowania:', error));
+        }
+
+        // Odpytuj backend co 300 milisekund
+        setInterval(updateData, 300);
+    </script>
 </body>
 </html>

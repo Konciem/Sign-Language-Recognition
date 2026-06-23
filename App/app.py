@@ -1,9 +1,9 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, jsonify
 from stabilizer import GestureStabilizer
+from WordStateMachine import WordStateMachine
 import mediapipe as mp
 import cv2
 import pickle
-
 
 app = Flask(__name__)
 
@@ -17,8 +17,16 @@ mp_draw = mp.solutions.drawing_utils
 camera = cv2.VideoCapture(0)
 
 stabilizer = GestureStabilizer(window_size=15)
+word_machine = WordStateMachine()  # Inicjalizacja maszyny stanów
+
+current_state = {
+    "char": "---",
+    "word": "---"
+}
+
 
 def generate_frames():
+    global current_state
     while True:
         success, frame = camera.read()
         if not success:
@@ -39,7 +47,14 @@ def generate_frames():
 
                 prediction = model.predict([data_aux])
                 predicted_char = prediction[0]
+
         stable_char = stabilizer.get_stable_prediction(predicted_char)
+
+        word_machine.process(stable_char)
+
+        # Aktualizujemy stan globalny
+        current_state["char"] = stable_char if stable_char else "---"
+        current_state["word"] = word_machine.get_current_word() if word_machine.get_current_word() else "---"
 
         cv2.putText(frame, stable_char, (50, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3)
@@ -59,6 +74,21 @@ def index():
 @app.route('/video_feed')
 def video_feed():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
+@app.route('/get_data')
+def get_data():
+    return jsonify(current_state)
+
+
+
+@app.route('/reset', methods=['POST'])
+def reset_word():
+    global current_state
+    word_machine.reset()
+    current_state["word"] = "---"
+    return jsonify({"status": "success", "message": "Zresetowano stan maszyny stanów"})
 
 
 if __name__ == '__main__':

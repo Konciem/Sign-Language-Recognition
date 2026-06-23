@@ -5,15 +5,15 @@
 
 body {
     font-family: 'JetBrains Mono', monospace;
-    background-color: #121212;
-    color: #00ff00;
+    background-color: #2e3440;
+    color: #d8dee9;
     display: flex;
     justify-content: center;
 }
 
 #result {
     font-size: 2rem;
-    color: #00ff00;
+    color: #d8dee9;
     margin-top: 20px;
 }
 
